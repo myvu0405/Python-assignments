@@ -1,5 +1,4 @@
 from random import randint
-from traceback import print_tb
 
 
 def mul(num):

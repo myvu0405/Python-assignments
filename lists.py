@@ -174,6 +174,7 @@ def winner(aBoard):
         
     return False
 
+# check if the board is full?
 def checkBoardFull(aBoard):
     boardVal=''
     for x in range(0,4):
@@ -185,6 +186,7 @@ def checkBoardFull(aBoard):
     else:
         return False
 
+# reset the board for another round
 def resetBoard(aBoard):
     for x in range(0,4):
         for y in range(0,4):
@@ -194,7 +196,7 @@ def resetBoard(aBoard):
 # main program
 def ticTacToe():    
 
-    while True:
+    while True: #one round playing:
         print('Tic tac toe game starts!')
         displayBoard(board)
 
@@ -207,7 +209,7 @@ def ticTacToe():
                 getRolCol(board,'row')
                 getRolCol(board,'col')
                 while checkCellEmpty(board[currentPos[0]][currentPos[1]]) == False:
-                    print('The current cell is occupied! Player {} selects another X, Y positions in range(1-4)'.format(player.upper())) 
+                    print('ERROR! This cell is occupied! Player {} selects another X, Y positions in range(1-4)'.format(player.upper())) 
                     getRolCol(board,'row')
                     getRolCol(board,'col')
 
