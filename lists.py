@@ -63,9 +63,12 @@ def countLettersInStr(subStr, str):
     while  idx> -1:
         result.extend(mainStr[0:idx])
         if count==0:
-            result.extend(subStr)
+            result.extend([subStr])
+        print('result is: ',result)
         count +=1
-        mainStr=mainStr.replace(mainStr[0:len(subStr)+idx],'')
+        mainStr=mainStr.replace(mainStr[0:len(subStr)+idx],'',1) #fix: only remove once
+        print(idx,mainStr[0:len(subStr)+idx])
+        print('main str is',mainStr)
         idx=mainStr.find(subStr)
 
     result.extend(mainStr)
@@ -74,7 +77,7 @@ def countLettersInStr(subStr, str):
     return replaceStr, count
 
 
-# print(countLettersInStr('an', 'banana'))
+print(countLettersInStr('an', 'bananaanan an ccc'))
 
 # 5. Palindrome
 def palindrome(str):
@@ -234,4 +237,4 @@ def ticTacToe():
 
     print('The game is finished! Thank you for playing!')
 
-ticTacToe()
+# ticTacToe()
