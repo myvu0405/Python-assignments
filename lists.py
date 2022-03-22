@@ -122,7 +122,7 @@ def displayBoard(aBoard):
     print('-----------------')
 
 # get rol/col position for inputing
-def getRolCol(aBoard,axis):
+def getRolCol(axis):
     x = int(input('Please input {} number in range 1-4: '.format(axis)))
     while x <1 or x > 4:
         x = int(input('Input is not valid! Please enter {} number in range 1-4: '.format(axis)))
@@ -142,34 +142,37 @@ def checkCellEmpty(cell):
 def updateBoard(aBoard, player):
     aBoard[currentPos[0]][currentPos[1]]=player
 
-# check is there is any player won?
-def winner(aBoard):
+# check if there is any player won?
+def winner(aBoard,player):
 
-    winnerX = 'x'*4
-    winnerO = 'o'*4
+    theWinner = player*4
 
-    # check rows
-    for row in aBoard:
-        rowVal = ''.join(row)
-        if rowVal ==winnerX or rowVal == winnerO:
-            return True
+    # check row - based on current position
+    rowVal = ''.join(aBoard[currentPos[0]])  
+    if rowVal == theWinner:
+        return True
 
-    # check columns
-    for col in range(0,4):
-        colVal =''
-        for row in range(0,4):
-            colVal +=aBoard[row][col]
-        if colVal == winnerX or colVal == winnerO:
-            return True
+    # for row in aBoard:
+    #     rowVal = ''.join(row)
+    #     if rowVal == theWinner:
+    #         return True
+
+    # check column - based on the current position
+    colVal =''
+    for row in range(0,4):
+        colVal +=aBoard[row][currentPos[1]]
+    if colVal == theWinner:
+        return True
         
     # check diagonal lines
     diaVal1 = ''
     diaVal2 = ''
+    
     for p in range(0,4):
         diaVal1 += aBoard[p][p]
         diaVal2 += aBoard[p][4-p-1]
 
-    if diaVal1 == winnerX or diaVal2 ==winnerX or diaVal1 == winnerO or diaVal2 == winnerO:
+    if diaVal1 == theWinner or diaVal2 == theWinner:
         return True
         
     return False
@@ -205,18 +208,18 @@ def ticTacToe():
         
         while not isWon and not isBoardFull:
             for player in players:
-                print ('Player {} selects X, Y positions in range(1-4)'.format(player.upper()))
-                getRolCol(board,'row')
-                getRolCol(board,'col')
+                print ('Player {} selects (x,y) positions in range(1-4)'.format(player.upper()))
+                getRolCol('row')
+                getRolCol('col')
                 while checkCellEmpty(board[currentPos[0]][currentPos[1]]) == False:
-                    print('ERROR! This cell is occupied! Player {} selects another X, Y positions in range(1-4)'.format(player.upper())) 
-                    getRolCol(board,'row')
-                    getRolCol(board,'col')
+                    print('ERROR! This cell is occupied! Player {} selects another (x,y) positions in range(1-4)'.format(player.upper())) 
+                    getRolCol('row')
+                    getRolCol('col')
 
                 updateBoard(board,player)
                 displayBoard(board)
 
-                isWon = winner(board)
+                isWon = winner(board,player)
                 if isWon:
                     print('SUPER! Player {} won! The game is over!'.format(player.upper()))
                     break
@@ -234,4 +237,4 @@ def ticTacToe():
 
     print('The game is finished! Thank you for playing!')
 
-# ticTacToe()
+ticTacToe()
