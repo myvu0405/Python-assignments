@@ -64,11 +64,8 @@ def countLettersInStr(subStr, str):
         result.extend(mainStr[0:idx])
         if count==0:
             result.extend([subStr])
-        print('result is: ',result)
         count +=1
         mainStr=mainStr.replace(mainStr[0:len(subStr)+idx],'',1) #fix: only remove once
-        print(idx,mainStr[0:len(subStr)+idx])
-        print('main str is',mainStr)
         idx=mainStr.find(subStr)
 
     result.extend(mainStr)
